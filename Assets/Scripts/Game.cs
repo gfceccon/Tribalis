@@ -44,6 +44,7 @@ public class Game : MonoBehaviour
         {
             e = list.events[(int)currentEvent];
             ok = true;
+            immediate = false;
         }
         else foreach (EventsList.Events eventEnum in list.eventsOnTime)
             {
@@ -75,6 +76,7 @@ public class Game : MonoBehaviour
             }
             else
             {
+                dummy.GetComponent<Image>().enabled = true;
                 while (Time.realtimeSinceStartup < time + delayTime)
                 {
                     dummyImage.sprite = e.image;
@@ -89,6 +91,7 @@ public class Game : MonoBehaviour
 
             dummyImage.color = color;
             dummy.SetActive(false);
+            dummy.GetComponent<Image>().enabled = false;
 
             GameObject modal = Instantiate<GameObject>(modalPrefab);
             modal.transform.SetParent(transform);
@@ -108,6 +111,7 @@ public class Game : MonoBehaviour
             return;
 
         currentEvent = option;
+        immediate = true;
         list.completed[(int)option] = true;
         Event e = list.events[(int)option];
 

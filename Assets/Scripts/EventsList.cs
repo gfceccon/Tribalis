@@ -254,7 +254,7 @@ public class EventsList : MonoBehaviour
 
         // DC2:
         events[(int)Events.DC2Reli] = new Event(
-            "DC2Reli",
+            "sacrificio humano",
             "Um menino, que acabava de se tornar homem, foi o escolhido para ser sacrificado: uma vida pelas outras. O sangue da tribo derramado no chão compadeceram os deuses. O Sol brilhou novamente no céu.",
             new Events[] { },
             1, 0, 0,
@@ -263,7 +263,7 @@ public class EventsList : MonoBehaviour
         );
 
         events[(int)Events.DC2Merc] = new Event(
-            "DC2Merc",
+            "bola de ouro",
             "Todo o ferro possível foi derretido e banhado a ouro para a criação de um imenso monumento em forma de esfera. O brilho desta estrela em terra compadeceram os deuses. O Sol brilharia para sempre no céu agora.",
             new Events[] { },
             0, 1, 0,
@@ -272,7 +272,7 @@ public class EventsList : MonoBehaviour
         );
 
         events[(int)Events.DC2Mili] = new Event(
-            "DC2Mili",
+            "sacrificio melhor guerreiro",
             "Os dois maiores guerreiros da tribo travaram uma grande luta: o vencedor iria ao céus em forma de sacrifício. O sangue da luta derramado no chão compadeceram os deuses. O Sol brilhou novamente no céu.",
             new Events[] { },
             0, 0, 1,
@@ -300,7 +300,7 @@ public class EventsList : MonoBehaviour
         );
 
         events[(int)Events.DC3Mili] = new Event(
-            "DC3Mili",
+            "comemoracao jogos olimpicos",
             "Uma competição entre os guerreiros tornou-se o foco da atenção da tribo durante muitas luas, e por muitos anos. A procura pelo soldado mais forte, ágil e talentoso mostrava que a força do militarismo naquele povo era mais do que perceptível.",
             new Events[] { },
             0, 0, 1,
@@ -310,7 +310,7 @@ public class EventsList : MonoBehaviour
 
         // DC4:
         events[(int)Events.DC4Inclusivo] = new Event(
-            "DC4Inclusivo",
+            "festa inclusiva",
             "Em torno da estátua dos deuses, um grande festival se instauraria por muitas gerações a partir de então. Colocando todas as etnias em igualdade, todas elas eram convidadas a rogar para os mesmos deuses e viver em harmonia.",
             new Events[] { },
             0, 0, 0,
@@ -319,7 +319,7 @@ public class EventsList : MonoBehaviour
         );
 
         events[(int)Events.DC4Exclusivo] = new Event(
-            "DC4Exclusivo",
+            "festa exclusiva",
             "Em torno da estátua dos deuses, um grande festival se instauraria por muitas gerações a partir de então. Afirmando a superioridade de sua tribo, o povo já se sentia capaz de levar a sua cultura para outros, que ainda viviam na barbárie.",
             new Events[] { },
             0, 0, 0,
@@ -346,8 +346,8 @@ public class EventsList : MonoBehaviour
         );
 
         events[(int)Events.DC4ExclusivoMerc] = new Event(
-            "DC4ExclusivoMerc",
-            "O “Dia da Batata” tornou-se uma tradição na tribo, não apenas pelas criações que surgiam todos os anos com o tubérculo, mas pelo entreposto comercial que se formava. Com a abundância de outros produtos, eles também começaram a ser comercializados, como tecidos, caça e até escravos.",
+            "dia da batata",
+            "O \"Dia da Batata\" tornou-se uma tradição na tribo, não apenas pelas criações que surgiam todos os anos com o tubérculo, mas pelo entreposto comercial que se formava. Com a abundância de outros produtos, eles também começaram a ser comercializados, como tecidos, caça e até escravos.",
             new Events[] { },
             0, 1, 0,
             0, 0, 0,
