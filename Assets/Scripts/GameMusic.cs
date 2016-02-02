@@ -30,7 +30,6 @@ public class GameMusic : MonoBehaviour
 
 
     private Society.StyleChoices _style;
-    private bool[] currentPlaying = new bool[(int)Society.StyleChoices.None];
     private bool crossfading = false;
     private bool ready = true;
 
@@ -65,148 +64,137 @@ public class GameMusic : MonoBehaviour
             mixerPattern = newMixerPattern;
         }
 
-        StartCoroutine(Crossfade(mixerPattern[0]));
+        mercantile.volume = 1f;
+        mercantileBeat.volume = 1f;
+
+        military.volume = 1f;
+        militaryBeat.volume = 1f;
+
+        religious.volume = 1f;
+        religiousBeat.volume = 1f;
+        
+        StartCoroutine(Crossfade());
     }
 
     private void SetStyle(Society.StyleChoices value)
     {
         _style = value;
+        Debug.Log(style);
 
         if (value == Society.StyleChoices.None)
             return;
 
-        Vector3 vec = new Vector3(value == Society.StyleChoices.Mercantile ? 1f : 0f,
-                                    value == Society.StyleChoices.Military ? 1f : 0f,
-                                    value == Society.StyleChoices.Religious ? 1f : 0f);
-
-        StartCoroutine(WaitCoroutineStop(vec));
-    }
-
-    float Cos(float x)
-    {
-        float cos;
-        x += 1.57079632f;
-        if (x > Mathf.PI)
-            x -= 6.28318531f;
-
-        cos = 1.27323954f * x + (x > 0f ? -0.405284735f : +0.405284735f) * x * x;
-
-        if (cos < 0)
-            cos = .225f * (cos * -cos - cos) + cos;
-        else
-            cos = .225f * (cos * cos - cos) + cos;
-        return cos;
+        StartCoroutine(CrossfadeStyle());
     }
 
     float CosineInterpolate(float y1, float y2, float mu)
     {
         float mu2;
 
-        mu2 = (1 - Cos(mu * Mathf.PI)) / 2;
+        mu2 = (1 - Mathf.Cos(mu * Mathf.PI)) / 2;
         return (y1 * (1 - mu2) + y2 * mu2);
     }
 
-    private IEnumerator WaitCoroutineStop(Vector3 vec)
+    private IEnumerator CrossfadeStyle()
     {
+        crossfading = false;
         yield return new WaitUntil(() => ready);
-        StartCoroutine(Crossfade(vec));
-    }
-    private IEnumerator WaitForNextTimestamp()
-    {
-        int index = -1;
-        float least = Mathf.Infinity;
-        for (int i = 0; i < timestamps.Length; i++)
-        {
-            if (timestamps[i] - fadeDuration > mercantile.time && timestamps[i] - fadeDuration - mercantile.time < least)
-            {
-                least = timestamps[i] - fadeDuration;
-                index = i;
-            }
-        }
-        Vector3 vec = new Vector3(0f, 0f, 0f);
-        if (index != -1)
-        {
-            vec = vec + mixerPattern[index];
-            while (least - mercantile.time > 0.25f)
-                yield return null;
-        }
-        else
-        {
-            vec = vec + mixerPattern[0];
-            while (mercantile.time > 0.25f)
-                yield return null;
-        }
-
-        if (crossfading)
-        {
-            crossfading = false;
-            StartCoroutine(WaitCoroutineStop(vec));
-        }
-        else
-            StartCoroutine(Crossfade(vec));
+        timestamps = null;
+        mixerPattern = null;
+        StartCoroutine(Crossfade());
     }
 
-    IEnumerator Crossfade(Vector3 volumes)
+    IEnumerator Crossfade()
     {
         crossfading = true;
         ready = false;
 
-        float time = 0f;
-        float mercantileVolume = mercantile.volume;
-        float militaryVolume = military.volume;
-        float religiousVolume = religious.volume;
 
-        while (crossfading && time < fadeDuration)
+        while (crossfading)
         {
-            if (!currentPlaying[(int)Society.StyleChoices.Mercantile] && !Mathf.Approximately(volumes.x, 0f))
+            Vector3 volumes = new Vector3(0f, 0f, 0f);
+            if(timestamps != null)
             {
-                float volumeUp = CosineInterpolate(0f, volumes.x, time / fadeDuration);
-                mercantile.volume = volumeUp;
-                mercantileBeat.volume = volumeUp;
+                int index = -1;
+                float least = Mathf.Infinity;
+                for (int i = 0; i < timestamps.Length; i++)
+                {
+                    if (timestamps[i] - fadeDuration > mercantile.time && timestamps[i] - fadeDuration - mercantile.time < least)
+                    {
+                        least = timestamps[i] - fadeDuration;
+                        index = i;
+                    }
+                }
+
+                if (index != -1)
+                {
+                    volumes = volumes + mixerPattern[index];
+                    while (least - mercantile.time > 0.1f)
+                        yield return null;
+                }
+                else
+                {
+                    volumes = volumes + mixerPattern[0];
+                    while (mercantile.time > 0.1f)
+                        yield return null;
+                }
             }
-            else if (currentPlaying[(int)Society.StyleChoices.Mercantile] && Mathf.Approximately(volumes.x, 0f))
+            else
             {
-                float volumeDown = CosineInterpolate(mercantileVolume, 0f, time / fadeDuration);
-                mercantile.volume = volumeDown;
-                mercantileBeat.volume = volumeDown;
+                volumes.x = style == Society.StyleChoices.Mercantile ? 1f : 0f;
+                volumes.y = style == Society.StyleChoices.Military ? 1f : 0f;
+                volumes.z = style == Society.StyleChoices.Religious ? 1f : 0f;
             }
 
-            if (!currentPlaying[(int)Society.StyleChoices.Military] && !Mathf.Approximately(volumes.y, 0f))
+
+            float time = 0f;
+            float mercantileVolume = mercantile.volume;
+            float militaryVolume = military.volume;
+            float religiousVolume = religious.volume;
+            Debug.Log(mercantileVolume);
+            bool[] currentPlaying = new bool[(int)Society.StyleChoices.None];
+            bool[] toPlay = new bool[(int)Society.StyleChoices.None];
+
+            currentPlaying[(int)Society.StyleChoices.Mercantile] = !Mathf.Approximately(mercantileVolume, 0f);
+            currentPlaying[(int)Society.StyleChoices.Military] = !Mathf.Approximately(militaryVolume, 0f);
+            currentPlaying[(int)Society.StyleChoices.Religious] = !Mathf.Approximately(religiousVolume, 0f);
+
+            toPlay[(int)Society.StyleChoices.Mercantile] = !Mathf.Approximately(volumes.x, 0f);
+            toPlay[(int)Society.StyleChoices.Military] = !Mathf.Approximately(volumes.y, 0f);
+            toPlay[(int)Society.StyleChoices.Religious] = !Mathf.Approximately(volumes.z, 0f);
+
+            while (crossfading && time < fadeDuration)
             {
-                float volumeUp = CosineInterpolate(0f, volumes.y, time / fadeDuration);
-                military.volume = volumeUp;
-                militaryBeat.volume = volumeUp;
-            }
-            else if (currentPlaying[(int)Society.StyleChoices.Military] && Mathf.Approximately(volumes.y, 0f))
-            {
-                float volumeDown = CosineInterpolate(militaryVolume, 0f, time / fadeDuration);
-                military.volume = volumeDown;
-                militaryBeat.volume = volumeDown;
+                float crossfadeVolume;
+                if (toPlay[(int)Society.StyleChoices.Mercantile] && toPlay[(int)Society.StyleChoices.Military] && toPlay[(int)Society.StyleChoices.Religious])
+                {
+                    int choose = Random.Range(0, 2);
+                    if (choose == 0)
+                        volumes.z = 0f;
+                    else if (choose == 1)
+                        volumes.y = 0f;
+                    else
+                        volumes.x = 0f;
+                }
+
+                crossfadeVolume = CosineInterpolate(mercantileVolume, volumes.x, time / fadeDuration);
+                mercantile.volume = crossfadeVolume;
+                mercantileBeat.volume = crossfadeVolume;
+
+                crossfadeVolume = CosineInterpolate(militaryVolume, volumes.y, time / fadeDuration);
+                military.volume = crossfadeVolume;
+                militaryBeat.volume = crossfadeVolume;
+
+                crossfadeVolume = CosineInterpolate(religiousVolume, volumes.z, time / fadeDuration);
+                religious.volume = crossfadeVolume;
+                religiousBeat.volume = crossfadeVolume;
+
+
+                yield return null;
+                time += Time.deltaTime;
             }
 
-            if (!currentPlaying[(int)Society.StyleChoices.Religious] && !Mathf.Approximately(volumes.z, 0f))
-            {
-                float volumeUp = CosineInterpolate(0f, volumes.z, time / fadeDuration);
-                military.volume = volumeUp;
-                militaryBeat.volume = volumeUp;
-            }
-            else if (currentPlaying[(int)Society.StyleChoices.Religious] && Mathf.Approximately(volumes.z, 0f))
-            {
-                float volumeDown = CosineInterpolate(religiousVolume, 0f, time / fadeDuration);
-                religious.volume = volumeDown;
-                religiousBeat.volume = volumeDown;
-            }
-
-            yield return null;
         }
-
-        for (int i = 0; i < currentPlaying.Length; i++)
-            currentPlaying[i] = false;
-
-        currentPlaying[(int)Society.StyleChoices.Mercantile] = !Mathf.Approximately(volumes.x, 0f);
-        currentPlaying[(int)Society.StyleChoices.Military] = !Mathf.Approximately(volumes.y, 0f);
-        currentPlaying[(int)Society.StyleChoices.Religious] = !Mathf.Approximately(volumes.z, 0f);
-
         crossfading = false;
         ready = true;
     }

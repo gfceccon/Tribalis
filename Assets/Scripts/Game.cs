@@ -10,8 +10,16 @@ public class Game : MonoBehaviour
     public Society society;
     public GameObject modalPrefab;
     public GameObject dummy;
+    public GameMusic music;
     public float delayTime = 2f;
     public float visibleTime = 0.2f;
+    [Header("Music Presets")]
+    public MusicPreset mercantile;
+    public MusicPreset military;
+    public MusicPreset religious;
+    public MusicPreset mercantileMilitary;
+    public MusicPreset militaryReligious;
+    public MusicPreset mercantileReligious;
     
     [HideInInspector]
     public EventsList list;
@@ -117,11 +125,30 @@ public class Game : MonoBehaviour
 
 
         status.Add(e.people, e.resources, e.morale);
-        if (e.religious == 1)
-            society.AddReligious();
+        if (e.mercantile == 1)
+            society.AddMercantile();
         else if (e.military == 1)
             society.AddMilitary();
-        else if (e.mercantile == 1)
-            society.AddMercantile();
+        else if (e.religious == 1)
+            society.AddReligious();
+
+        if (society.Mercantile > 0)
+        {
+            if (society.Military > 0)
+                mercantileMilitary.Set();
+            else if (society.Religious > 0)
+                mercantileReligious.Set();
+            else
+                mercantile.Set();
+        }
+        else if (society.Military > 0)
+        {
+            if (society.Religious > 0)
+                militaryReligious.Set();
+            else
+                military.Set();
+        }
+        else if(society.Religious > 0)
+            religious.Set();
     }
 }

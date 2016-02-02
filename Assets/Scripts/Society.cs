@@ -7,9 +7,9 @@ public class Society : MonoBehaviour
 
     public enum StyleChoices
     {
-        Religious,
         Mercantile,
         Military,
+        Religious,
         None
     };
     //	[SerializeField]
@@ -18,6 +18,28 @@ public class Society : MonoBehaviour
     //	private int resourcesVariation;
     //	[SerializeField]
     //	private int moraleVariation;
+
+    public int Mercantile
+    {
+        get
+        {
+            return mercantile;
+        }
+    }
+    public int Military
+    {
+        get
+        {
+            return military;
+        }
+    }
+    public int Religious
+    {
+        get
+        {
+            return religious;
+        }
+    }
 
     private int religious;
     private int mercantile;
