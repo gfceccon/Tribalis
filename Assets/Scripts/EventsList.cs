@@ -144,6 +144,8 @@ public class EventsList : MonoBehaviour
         BadEndMora,
         BadEndMora2,
         BadEndMora3,
+        Lose,
+        Win,
         Size,
         None
     };
@@ -283,8 +285,8 @@ public class EventsList : MonoBehaviour
             0, 0, 0,
             0, 0, 0,
             new Option[] {
-                new Option ("Igualdade étnica", Events.PreDC4Inclusivo),
-                new Option ("Afirmação cultural", Events.PreDC4Exclusivo)
+                new Option ("Igualdade étnica", Events.DC4Inclusivo),
+                new Option ("Afirmação cultural", Events.DC4Exclusivo)
             }
         );
 
@@ -327,7 +329,7 @@ public class EventsList : MonoBehaviour
         );
 
         events[(int)Events.DC1Merc] = new Event(
-            "oferenda peixe",
+            "oferenda pesca",
             "Homens de todas as idades foram às margens do rio para pescar. Com uma quantidade exorbitante de peixes entregados aos deuses, os clãs reafirmavam a sua religião e começavam a ser conhecidos na região.",
             new Events[] { },
             0, 1, 0,
@@ -1571,7 +1573,7 @@ public class EventsList : MonoBehaviour
             new Events[] { },
             0, 0, 0,
             0, 0, 0,
-            new Option[] { }
+            new Option[] { new Option("Vitória", Events.Win) }
         );
 		
 		events[(int)Events.GoodEndMerc] = new Event(
@@ -1581,7 +1583,7 @@ public class EventsList : MonoBehaviour
             new Events[] { },
             0, 0, 0,
             0, 0, 0,
-            new Option[] { }
+            new Option[] { new Option("Vitória", Events.Win) }
         );
 		
 		events[(int)Events.GoodEndMili] = new Event(
@@ -1591,7 +1593,7 @@ public class EventsList : MonoBehaviour
             new Events[] { },
             0, 0, 0,
             0, 0, 0,
-            new Option[] { }
+            new Option[] { new Option("Vitória", Events.Win) }
         );
 		
 		// bad endings
@@ -1604,27 +1606,27 @@ public class EventsList : MonoBehaviour
             new Events[] { },
             0, 0, 0,
             0, 0, 0,
-            new Option[] { }
+            new Option[] { new Option("Continuar", Events.BadEndPess2) }
         );
 		
 		events[(int)Events.BadEndPess2] = new Event(
             defaultImg, 
             "Pode-se contar com as mãos os que ainda plantam para tentar sobreviver — a caça deixou de ser uma opção. A fome acompanha a tribo a cada noite.",
 
-            new Events[] { Events.BadEndPess },
+            new Events[] {  },
             0, 0, 0,
             0, -6, 0,
-            new Option[] { }
+            new Option[] { new Option("Continuar", Events.BadEndPess3) }
         );
 		
 		events[(int)Events.BadEndPess3] = new Event(
             defaultImg, // COLOCAR IMAGEM DE BAD ENDING
             "Os poucos que sobraram quase não tem mais comida, depois de ferrenhas lutas entre si. Sem pessoas, recursos ou sentimentos de esperança, sua tribo sofreu um ataque de um povo guerreiro do Leste. Todos foram dominados e escravizados.",
 
-            new Events[] { Events.BadEndPess },
+            new Events[] { },
             0, 0, 0,
             0, 0, -6,
-            new Option[] { }
+            new Option[] { new Option("Desistir", Events.Lose) }
         );
 		
 		// trigger: falta de recursos		
@@ -1635,27 +1637,27 @@ public class EventsList : MonoBehaviour
             new Events[] { },
             0, 0, 0,
             0, 0, 0,
-            new Option[] { }
+            new Option[] { new Option("Continuar", Events.BadEndRecu2) }
         );
 		
 		events[(int)Events.BadEndRecu2] = new Event(
             defaultImg, 
             "Aos poucos, a população da tribo diminuiu consideravelmente. Os poucos que ainda comiam lutavam por sua sobrevivência, mas todo o esforço parecia em vão.",
 
-            new Events[] { Events.BadEndRecu },
+            new Events[] {  },
             0, 0, 0,
             -6, 0, 0,
-            new Option[] { }
+            new Option[] { new Option("Continuar", Events.BadEndRecu3) }
         );
 		
 		events[(int)Events.BadEndRecu3] = new Event(
             defaultImg, // COLOCAR IMAGEM DE BAD ENDING
             "Reduzidos em um precário abrigo, a tribo perdia, todas as semanas, mais um membro em lutas internas. Sem pessoas, recursos ou sentimentos de esperança, sua tribo sofreu um ataque de um povo guerreiro do Sul. Todos foram dominados e escravizados.",
 
-            new Events[] { Events.BadEndRecu },
+            new Events[] {  },
             0, 0, 0,
             0, 0, -6,
-            new Option[] { }
+            new Option[] { new Option("Desistir", Events.Lose) }
         );
 		
 		// trigger: falta de moral
@@ -1666,27 +1668,27 @@ public class EventsList : MonoBehaviour
             new Events[] { },
             0, 0, 0,
             0, 0, 0,
-            new Option[] { }
+            new Option[] { new Option("Continuar", Events.BadEndMora2) }
         );
 		
 		events[(int)Events.BadEndMora2] = new Event(
             defaultImg, 
             "Separados e enfurecidos, a produção de alimentos decaía a cada semana que se passava. Os que não haviam morrido nas lutas, começavam a padecer de fome.",
 
-            new Events[] { Events.BadEndMora },
+            new Events[] {  },
             0, 0, 0,
             0, -6, 0,
-            new Option[] { }
+            new Option[] { new Option("Continuar", Events.BadEndMora3) }
         );
 		
 		events[(int)Events.BadEndMora3] = new Event(
             defaultImg, // COLOCAR IMAGEM DE BAD ENDING
             "Com a redução quase total da população, a tribo tentou se reunir, mas a situação apenas piorou. Sem pessoas, recursos ou sentimentos de esperança, sua tribo sofreu um ataque de um povo guerreiro do Sul. Todos foram dominados e escravizados.",
 
-            new Events[] { Events.BadEndMora },
+            new Events[] {  },
             0, 0, 0,
             -6, 0, 0,
-            new Option[] { }
+            new Option[] { new Option("Desistir", Events.Lose) }
         );
     }	
 }

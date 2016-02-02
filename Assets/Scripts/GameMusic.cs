@@ -79,7 +79,6 @@ public class GameMusic : MonoBehaviour
     private void SetStyle(Society.StyleChoices value)
     {
         _style = value;
-        Debug.Log(style);
 
         if (value == Society.StyleChoices.None)
             return;
@@ -200,4 +199,16 @@ public class GameMusic : MonoBehaviour
     }
 
 
+
+    public void Stop()
+    {
+        crossfading = false;
+        ready = false;
+        mercantile.loop = false;
+        mercantileBeat.loop = false;
+        military.loop = false;
+        militaryBeat.loop = false;
+        religious.loop = false;
+        religiousBeat.loop = false;
+    }
 }

@@ -20,10 +20,10 @@ public class Game : MonoBehaviour
     public MusicPreset mercantileMilitary;
     public MusicPreset militaryReligious;
     public MusicPreset mercantileReligious;
-    
+
     [HideInInspector]
     public EventsList list;
-    private EventsList.Events? currentEvent;
+    private EventsList.Events currentEvent;
     private Image dummyImage;
     private bool ready = true;
     private bool immediate = false;
@@ -73,6 +73,33 @@ public class Game : MonoBehaviour
                     break;
                 }
             }
+        if(!ok)
+        {
+            if (society.Mercantile == society.Military)
+            {
+                if (society.Religious > society.Mercantile)
+                    currentEvent = EventsList.Events.GoodEndReli;
+                else
+                    currentEvent = society.path[society.keyDecisionCount - 1] == Society.StyleChoices.Mercantile ? EventsList.Events.GoodEndMerc : EventsList.Events.GoodEndMili;
+                ok = true;
+            }
+            if (society.Military == society.Religious)
+            {
+                if (society.Mercantile > society.Military)
+                    currentEvent = EventsList.Events.GoodEndMerc;
+                else
+                    currentEvent = society.path[society.keyDecisionCount - 1] == Society.StyleChoices.Military ? EventsList.Events.GoodEndMili : EventsList.Events.GoodEndMerc;
+                ok = true;
+            }
+            if (society.Mercantile == society.Religious)
+            {
+                if (society.Military > society.Mercantile)
+                    currentEvent = EventsList.Events.GoodEndMili;
+                else
+                    currentEvent = society.path[society.keyDecisionCount - 1] == Society.StyleChoices.Religious ? EventsList.Events.GoodEndReli : EventsList.Events.GoodEndMerc;
+                ok = true;
+            }
+        }
         if (ok)
         {
             float time = Time.realtimeSinceStartup;
@@ -107,23 +134,27 @@ public class Game : MonoBehaviour
 
         }
         else
-            currentEvent = null;
+            currentEvent = EventsList.Events.None;
     }
 
-    public void Return(EventsList.Events? option)
+    public void Return(EventsList.Events option)
     {
+        if (option == EventsList.Events.Lose)
+        {
+            Lose();
+            return;
+        }
+        else if (option == EventsList.Events.Win)
+        {
+            Win();
+            return;
+        }
+
         ready = true;
         dummy.SetActive(true);
         list.completed[(int)currentEvent] = true;
-        if (option == null)
-            return;
 
-        currentEvent = option;
-        immediate = true;
-        list.completed[(int)option] = true;
-        Event e = list.events[(int)option];
-
-
+        Event e = list.events[(int)currentEvent];
         status.Add(e.people, e.resources, e.morale);
         if (e.mercantile == 1)
             society.AddMercantile();
@@ -148,7 +179,42 @@ public class Game : MonoBehaviour
             else
                 military.Set();
         }
-        else if(society.Religious > 0)
+        else if (society.Religious > 0)
             religious.Set();
+
+        if (option != EventsList.Events.None)
+        {
+
+            currentEvent = option;
+            immediate = true;
+            list.completed[(int)option] = true;
+        }
+        else if (status.People == 0)
+        {
+            currentEvent = EventsList.Events.BadEndPess;
+            immediate = true;
+        }
+        else if (status.Resources == 0)
+        {
+            currentEvent = EventsList.Events.BadEndRecu;
+            immediate = true;
+        }
+        else if (status.Morale == 0)
+        {
+            currentEvent = EventsList.Events.BadEndMora;
+            immediate = true;
+        } 
+    }
+
+    private void Win()
+    {
+        Application.Quit();
+        music.Stop();
+    }
+
+    private void Lose()
+    {
+        Application.Quit();
+        music.Stop();
     }
 }

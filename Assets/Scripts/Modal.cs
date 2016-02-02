@@ -26,7 +26,7 @@ public class Modal : MonoBehaviour
             description.fontSize = Mathf.RoundToInt(Camera.main.pixelWidth * fontDownscale);
     }
 
-    public void Event(EventsList.Events? option)
+    public void Event(EventsList.Events option)
     {
         master.Return(option);
         Destroy(gameObject);
@@ -53,19 +53,20 @@ public class Modal : MonoBehaviour
             buttonTransform.SetParent(transform, false);
             buttonTransform.sizeDelta.Set(1f, 1f);
             button.GetComponentInChildren<Text>().text = "Continuar";
-            button.GetComponent<ModalButton>().option = null;
+            button.GetComponent<ModalButton>().option = EventsList.Events.None;
         }
         else foreach (Option op in currentEvent.options)
         {
             bool isOpAvaiable = true;
-            foreach (EventsList.Events req in list.events[(int)op.consequence].requirements)
-            {
-                if (list.completed[(int)req] == false)
+            if (list.events[(int)op.consequence] != null)
+                foreach (EventsList.Events req in list.events[(int)op.consequence].requirements)
                 {
-                    isOpAvaiable = false;
-                    break;
+                    if (list.completed[(int)req] == false)
+                    {
+                        isOpAvaiable = false;
+                        break;
+                    }
                 }
-            }
             if(isOpAvaiable)
             {
                 GameObject button = Instantiate<GameObject>(optionPrefab);

@@ -8,6 +8,28 @@ public class StatusPanel : MonoBehaviour
     public Slider resources;
     public Slider morale;
 
+    public int People
+    {
+        get
+        {
+            return (int)people.value;
+        }
+    }
+    public int Resources
+    {
+        get
+        {
+            return (int)resources.value;
+        }
+    }
+    public int Morale
+    {
+        get
+        {
+            return (int)morale.value;
+        }
+    }
+
     public void Add(int people, int resources, int morale)
     {
         if (people < 0 && -people > this.people.value)
