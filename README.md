@@ -7,4 +7,5 @@ Jogo feito em Unity pelos jamers
 - Gabriel Nascimento
 - Rafael Miranda
 - Gabriel Toschi
-# Global Game Jam 2016
+
+## Global Game Jam 2016
