@@ -151,7 +151,7 @@ public class GameMusic : MonoBehaviour
             float mercantileVolume = mercantile.volume;
             float militaryVolume = military.volume;
             float religiousVolume = religious.volume;
-            Debug.Log(mercantileVolume);
+            
             bool[] currentPlaying = new bool[(int)Society.StyleChoices.None];
             bool[] toPlay = new bool[(int)Society.StyleChoices.None];
 

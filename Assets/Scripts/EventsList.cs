@@ -34,13 +34,15 @@ public class EventsList : MonoBehaviour
         DC3ReliLogB,
         DC3MercLogA,
         DC3MercLogB,
-        DC3MilILogA,
+        DC3MiliLogA,
         DC3MiliLogB,
         PreDC4,
         PreDC4Inclusivo,
         PreDC4Exclusivo,
         DC4Inclusivo,
         DC4Exclusivo,
+        DC4InclusivoLog,
+        DC4ExclusivoLog,
         DC4InclusivoReli,
         DC4InclusivoMerc,
         DC4ExclusivoMerc,
@@ -62,6 +64,23 @@ public class EventsList : MonoBehaviour
         S1C1Log,
         S1C2Log,
         S1C3Log,
+        S7A,
+        S7A1,
+        S7A2,
+        S7A3,
+        S7A1Log,
+        S7A2Log,
+        S7A3Log,
+        S7B,
+        S7B1,
+        S7B2,
+        S7B1Log,
+        S7B2Log,
+        S7C,
+        S7C1,
+        S7C2,
+        S7C1Log,
+        S7C2Log,
         S2A,
         S2A1,
         S2A2,
@@ -74,19 +93,57 @@ public class EventsList : MonoBehaviour
         S2B2,
         S2B1Log,
         S2B2Log,
+        S5A,
+        S5A1,
+        S5A2,
+        S5A1Log,
+        S5A2Log,
+        S5B,
+        S5B1,
+        S5B2,
+        S5B3,
+        S5B1Log,
+        S5B2Log,
+        S5B3Log,
+        S6A,
+        S6A1,
+        S6A2,
+        S6A1Log,
+        S6A2Log,
+        S6B,
+        S6B1,
+        S6B2,
+        S6B3,
+        S6B1Log,
+        S6B2Log,
+        S6B3Log,
         S3A,
         S3A1,
         S3A2,
-        //S3A1Log,
-        //S3A2Log,
+        S3A1Log,
+        S3A2Log,
         S3B,
         S3B1,
         S3B2,
-        S3B3,
-        //S3B1Log,
-        //S3B2Log,
-        //S3B3Log,
-        DC3MiliLogA,
+        S3B1Log,
+        S3B2Log,
+        S3C,
+        S3C1,
+        S3C2,
+        S3C1Log,
+        S3C2Log,
+        GoodEndReli,
+        GoodEndMerc,
+        GoodEndMili,
+        BadEndPess,
+        BadEndPess2,
+        BadEndPess3,
+        BadEndRecu,
+        BadEndRecu2,
+        BadEndRecu3,
+        BadEndMora,
+        BadEndMora2,
+        BadEndMora3,
         Size,
         None
     };
@@ -118,6 +175,16 @@ public class EventsList : MonoBehaviour
         Events.S1C1Log,
         Events.S1C2Log,
         Events.S1C3Log,
+		Events.S7A,
+		Events.S7A1Log,
+		Events.S7A2Log,
+		Events.S7A3Log,
+		Events.S7B,
+		Events.S7B1Log,
+		Events.S7B2Log,
+		Events.S7C,
+		Events.S7C1Log,
+		Events.S7C2Log,
         Events.PreDC2,
         Events.DC2ReliLogA,
         Events.DC2ReliLogB,
@@ -128,21 +195,46 @@ public class EventsList : MonoBehaviour
         Events.S2A,
         Events.S2A1Log,
         Events.S2A2Log,
+		Events.S5A,
+		Events.S5A1Log,
+		Events.S5A2Log,
+		Events.S5B,
+		Events.S5B1Log,
+		Events.S5B2Log,
+		Events.S5B3Log,
         Events.S2Ex,
         Events.S2ExLog,
         Events.S2B,
         Events.S2B1Log,
         Events.S2B2Log,
         Events.PreDC3,
-
         Events.DC3ReliLogA,
         Events.DC3ReliLogB,
         Events.DC3MercLogA,
         Events.DC3MercLogB,
-        Events.DC3MilILogA,
+        Events.DC3MiliLogA,
         Events.DC3MiliLogB,
-        Events.S3A,
-        Events.S3B
+		Events.S3A,
+		Events.S3A1Log,
+		Events.S3A2Log,
+        Events.S6A,
+		Events.S6A1Log,
+        Events.S6A2Log,
+		Events.S6B,
+		Events.S6B1Log,
+        Events.S6B2Log,
+        Events.S6B3Log,
+		Events.S3B,
+		Events.S3B1Log,
+		Events.S3B2Log,
+		Events.S3C,
+		Events.S3C1Log,
+		Events.S3C2Log,
+		Events.PreDC4,
+		Events.DC4InclusivoLog,
+		Events.DC4ExclusivoLog,
+		Events.PreDC4Inclusivo,
+		Events.PreDC4Exclusivo
         };
 
         events[(int)Events.PreDC1] = new Event(
@@ -220,7 +312,7 @@ public class EventsList : MonoBehaviour
             }
         );
 
-        // Acima, todas as escolhas-chave foram descritas (falta apenas determinar os efeitos numéricos)
+        // Acima, todas as escolhas-chave foram descritas
 
         //Em seguida, os eventos de decisões-chave:
 
@@ -546,6 +638,28 @@ public class EventsList : MonoBehaviour
             0, 0, 0,
             new Option[] { }
         );
+		
+		events[(int)Events.DC4InclusivoLog] = new Event(
+            defaultImg,
+            "O ato de trocar recursos por metais preciosos tornou-se comum na tribo. Alguns iam a outras tribos para realizar esse trabalho, outros os acompanhavam para disseminar a fé nos deuses.",
+
+            new Events[] { Events.DC4Inclusivo },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+		
+		events[(int)Events.DC4ExclusivoLog] = new Event(
+            defaultImg,
+            "A visão de superioridade tornou-se comum na tribo, ao ponto de realizar ataques em outras tribos para forçar relações econômicas. Em algumas destas investidas, boa parte dos povos eram escravizados para trabalharem em função do povo “superior”.",
+
+            new Events[] { Events.DC4Exclusivo },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+		
+		
 
         // Eventos secundários
 
@@ -728,6 +842,186 @@ public class EventsList : MonoBehaviour
             0, 0, 0,
             new Option[] { }
         );
+		
+		events[(int)Events.S7A] = new Event(
+            defaultImg,
+            "Foram avistados, circundando a tribo, estranhas criaturas selvagens. O povo, mesmo maravilhado com esses animais, foi tomado por um generalizado sentimento de medo e desespero. O que fazer?",
+
+            new Events[] { },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] {
+                new Option("Esconder-se", Events.S7A1),
+                new Option("Atacá-los", Events.S7A2),
+				new Option("Alimentá-los", Events.S7A3)
+            }
+        );
+
+        events[(int)Events.S7A1] = new Event(
+            defaultImg,
+            "Com a aproximação dos animais, o desespero tornou-se pânico e todos começaram a se esconder daquelas estranhas criaturas. Além do terror instaurado na tribo, a morte de alguns durante a agitação foi inevitável.",
+
+            new Events[] { },
+            0, 0, 0,
+            -1, 0, -1,
+            new Option[] { }
+        );
+		
+		events[(int)Events.S7A2] = new Event(
+            defaultImg,
+            "Via-se, saindo da tribo, apenas guerreiros enfurecidos em destruir a ameaça que os confrontava. Enquanto mais uma manada se aproximava, muitos dos animais foram rapidamente capturados.",
+
+            new Events[] { },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+		
+		events[(int)Events.S7A3] = new Event(
+            defaultImg,
+            "Gastar os alimentos que poderiam servir à tribo com estranhas criaturas parecia loucura pela visão de alguns, mas foi uma boa estratégia. As feições de ataque dos animais deram lugar a inesperadas expressões de docilidade.",
+
+            new Events[] { },
+            0, 0, 0,
+            0, -1, 0,
+            new Option[] { }
+        );
+
+        events[(int)Events.S7A1Log] = new Event(
+            defaultImg,
+            "Alguns meses foram necessários para que os animais se espalhassem para outros locais, amenizando o emocional dos mais fracos da tribo.",
+
+            new Events[] { Events.S7A1 },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+		
+		events[(int)Events.S7A2Log] = new Event(
+            defaultImg,
+            "Dormir não era mais uma condição favorável. As criaturas que continuavam circundando a tribo uivavam durante toda a noite, aumentando ainda mais o pavor das pessoas.",
+
+            new Events[] { Events.S7A2 },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+		
+		events[(int)Events.S7A3Log] = new Event(
+            defaultImg,
+            "Uma das criaturas conseguiu fugir no meio da noite e destruiu cestos de vegetais que iriam abastecer um dos clãs da tribo. Como vingança, eles mataram alguns outros animais, em segredo, para se alimentar.",
+
+            new Events[] { Events.S7A3 },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+		
+		events[(int)Events.S7B] = new Event(
+            defaultImg,
+            "Passaram-se alguns dias e as criaturas continuam aparecendo nos arredores da tribo, deixando ainda um sentimento de apreensão no ar. A maioria da tribo espera que os guerreiros voltem aos campos e tragam mais animais como alimento, mas alguns dizem que matar os capturados podem afugentar os que ainda circundam. O que fazer com eles?",
+
+            new Events[] { Events.S7A2 },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] {
+                new Option("Usá-los como alimento", Events.S7B1),
+                new Option("Afugentar os outros", Events.S7B2)
+            }
+        );
+
+        events[(int)Events.S7B1] = new Event(
+            defaultImg,
+            "Depois de mais alguns dias de enfrentamento, as criaturas pararam de passar pela tribo e a reserva de carne recebeu um grande aumento, com a morte dos animais capturados.",
+
+            new Events[] { },
+            0, 0, 0,
+            0, 1, 0,
+            new Option[] { }
+        );
+		
+		events[(int)Events.S7B2] = new Event(
+            defaultImg,
+            "Animais empalados em estacas de madeira circundavam a tribo. A técnica não apenas afugentou as temidas criaturas, mas também materializou a força da qual os guerreiros tanto se orgulhavam.",
+
+            new Events[] { },
+            0, 0, 0,
+            0, 0, 1,
+            new Option[] { }
+        );
+		
+		events[(int)Events.S7B1Log] = new Event(
+            defaultImg,
+            "A carne dessas novas criaturas dava mais energia e sustento aos caçadores, que podiam ficar mais tempo caçando e trazendo recursos para a tribo. Até os camponeses melhoraram sua produção.",
+
+            new Events[] { Events.S7B1 },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+		
+		events[(int)Events.S7B2Log] = new Event(
+            defaultImg,
+            "Caçadores de uma tribo vizinha foram avistados perto das plantações, segurando lanças e escudos. As carcaças das criaturas acabaram por afugentá-los.",
+
+            new Events[] { Events.S7B2 },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+		
+		events[(int)Events.S7C] = new Event(
+            defaultImg,
+            "Há alguns dias, o sentimento de medo deu lugar à curiosidade. As criaturas pareciam gostar da presença e dos agrados dados pela tribo e, acima de tudo, continuavam fascinando a todos. O que fazer com elas?",
+
+            new Events[] { Events.S7A3 },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] {
+                new Option("Tentar domesticá-los", Events.S7C1),
+                new Option("Matar como alimento", Events.S7C2)
+            }
+        );
+
+        events[(int)Events.S7C1] = new Event(
+            defaultImg,
+            "Os peculiares animais tinham a selvageria muito intrínsecas e uma tentativa de domesticá-los foi em vão. Mesmo assim, a relação entre eles e a tribo se mantinha favorável: as criaturas, de tempos em tempos, passavam por ali e as pessoas se sentiam protegidas por seus novos companheiros.",
+
+            new Events[] { },
+            0, 0, 0,
+            0, 0, 1,
+            new Option[] { }
+        );
+		
+		events[(int)Events.S7C2] = new Event(
+            defaultImg,
+            "Era inegável a quantidade de alimento conseguida com a morte das criaturas, mas a religiosidade do povo não viu aquela prática com bons olhos. Os que tinham mais fé até se negavam em digerir a carne daqueles animais abençoados pelos deuses.",
+
+            new Events[] { },
+            0, 0, 0,
+            0, 1, -1,
+            new Option[] { }
+        );
+		
+		events[(int)Events.S7C1Log] = new Event(
+            defaultImg,
+            "Caçadores de uma tribo vizinha foram avistados perto das plantações, segurando lanças e escudos. Uma das criaturas, que veio aos camponeses conseguir comida, atacou-os, afugentando os invasores.",
+
+            new Events[] { Events.S7C1 },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+		
+		events[(int)Events.S7C2Log] = new Event(
+            defaultImg,
+            "A prática de usar animais como oferenda foi abandonada com o tempo, depois do episódio com as criaturas. Eles eram usados apenas em ocasiões muito especiais, como o fim da colheita.",
+
+            new Events[] { Events.S7C2 },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
 
         events[(int)Events.S2A] = new Event(
             defaultImg,
@@ -854,8 +1148,135 @@ public class EventsList : MonoBehaviour
             0, 0, 0,
             new Option[] { }
         );
+		
+		events[(int)Events.S5A] = new Event(
+            defaultImg,
+            "Por conta de uma sucessão infeliz de más colheitas, a fartura deixou de fazer parte do dia a dia da tribo. Alimentar-se virou apenas uma questão de sobrevivência e lutas entre clãs para conseguir recursos tornaram-se mais comuns. O que fazer diante desse cenário?",
 
-        events[(int)Events.S3A] = new Event(
+            new Events[] { },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] {
+                new Option("Incentivar as lutas", Events.S5A1),
+                new Option("Resolver pacificamente", Events.S5A2)
+            }
+        );
+
+        events[(int)Events.S5A1] = new Event(
+            defaultImg,
+            "Lutar para se alimentar tornou-se hábito na tribo, chegando a causar mortes. Os poucos alimentos, advindos de caças e pescas mal-sucedidas e colheitas fracas, estão na mão daqueles que podem dominar os demais.",
+
+            new Events[] { },
+            0, 0, 0,
+            -1, 0, 0,
+            new Option[] { }
+        );
+		
+		events[(int)Events.S5A2] = new Event(
+            defaultImg,
+            "Após alguns meses de afloradas discussões, os clãs chegaram a um consenso sobre a divisão de seus recursos, alcançando, novamente, um equilíbrio coletivo, mesmo que, para isso, parte dos estoques feitos para o inverno tivessem de ser usados.",
+
+            new Events[] { },
+            0, 0, 0,
+            0, -1, 1,
+            new Option[] { }
+        );
+
+        events[(int)Events.S5A1Log] = new Event(
+            defaultImg,
+            "Nada parecia funcionar para que as colheitas voltassem a ser prósperas. Os que eram mais pobres, pela falta de alimento, já começavam a comer a própria terra, a única coisa em abundância naqueles tempos.",
+
+            new Events[] { Events.S5A1 },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+		
+		events[(int)Events.S5A2Log] = new Event(
+            defaultImg,
+            "Com climas e chuvas constantes, foi apenas questão de tempo para que as colheitas voltassem a ser prósperas. Aos poucos, a tribo voltava a ter uma abundância de recursos vista apenas por seus antepassados.",
+
+            new Events[] { Events.S5A2 },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+		
+		events[(int)Events.S5B] = new Event(
+            defaultImg,
+            "As disputas por comida estão insustentáveis e chegarão ao estado de barbárie em pouco tempo. Um pequeno grupo é passivo diante deste cenário, mas a maioria da tribo quer o fim das lutas, seja por meios pacíficos ou violentos. O que fazer?",
+
+            new Events[] { Events.S5A1 },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] {
+                new Option("Impor com normas", Events.S5B1),
+                new Option("Coagir com violência", Events.S5B2),
+				new Option("Ficar passivo às lutas", Events.S5B3)
+            }
+        );
+
+        events[(int)Events.S5B1] = new Event(
+            defaultImg,
+            "Alguns anos se passaram até que todos os clãs aceitassem as normas e uma certa paz voltasse a se instaurar na tribo, principalmente ao sentir a mudança de atmosfera que o fim das lutas proporcionou ao povo.",
+
+            new Events[] { },
+            0, 0, 0,
+            0, 0, 1,
+            new Option[] { }
+        );
+		
+		events[(int)Events.S5B2] = new Event(
+            defaultImg,
+            "Em pouco tempo, as lutas foram apaziguadas e os alimentos passaram a ser distribuídos em um autoritário sistema de racionalização. Por mais que não houvessem mais disputas, o povo se sentia coagido a aceitar o que se formara.",
+
+            new Events[] { },
+            0, 0, 0,
+            0, 0, -1,
+            new Option[] { }
+        );
+		
+		events[(int)Events.S5B3] = new Event(
+            defaultImg,
+            "Felizmente, a prosperidade chegou á vida da tribo antes da barbárie, mas não antes de muitas pessoas serem mortas em lutas ou de fome, instaurando uma atmosfera de medo de que tal situação voltasse a ocorrer.",
+
+            new Events[] { },
+            0, 0, 0,
+            0, -1, -1,
+            new Option[] { }
+        );
+		
+		events[(int)Events.S5B1Log] = new Event(
+            defaultImg,
+            "A distribuição de água, após alguns períodos de baixa do rio, também se tornaram problema. A extensão das normas a esta nova questão foi natural e ocorreram pouquíssimos conflitos armados.",
+
+            new Events[] { Events.S5B1 },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+		
+		events[(int)Events.S5B2Log] = new Event(
+            defaultImg,
+            "A distribuição de água, após alguns períodos de baixa do rio, também se tornaram problema. A extensão do autoritarismo a esta nova questão foi natural e muitas pessoas acabaram fugindo da tribo por não suportar a situação.",
+
+            new Events[] { Events.S5B2 },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+		
+		events[(int)Events.S5B3Log] = new Event(
+            defaultImg,
+            "A distribuição de água, após alguns períodos de baixa do rio, também se tornaram problema. O medo da bárbarie tomou conta novamente da tribo, que brigava pelo controle de certos canais.",
+
+            new Events[] { Events.S5B3 },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+
+        events[(int)Events.S6A] = new Event(
             defaultImg,
             "Um mensageiro de uma tribo aliada chega ofegante com a informação de que o seu povo será atacado em breve por um inimigo em comum. A sua ajuda é requisitada e, dado o apoio deles, é impossível recusar. O que fazer?",
 
@@ -863,12 +1284,12 @@ public class EventsList : MonoBehaviour
             0, 0, 0,
             0, 0, 0,
             new Option[] {
-                new Option("Negociar o ataque", Events.S3A1),
-                new Option("Entrar na guerra", Events.S3A2)
+                new Option("Negociar o ataque", Events.S6A1),
+                new Option("Entrar em guerra", Events.S6A2)
             }
         );
 
-        events[(int)Events.S3A1] = new Event(
+        events[(int)Events.S6A1] = new Event(
             defaultImg,
             "Depois de algumas longas discussões, a sua tribo conseguiu impedir o ataque ao aliado, oferecendo uma boa quantia de recursos em troca. A paz reinava novamente.",
 
@@ -878,11 +1299,19 @@ public class EventsList : MonoBehaviour
             new Option[] { }
         );
 
-        // falta S3A1Log
-
-        events[(int)Events.S2A2] = new Event(
+        events[(int)Events.S6A1Log] = new Event(
             defaultImg,
-            "Esperada por alguns e temida por todos, a possibilidade de uma guerra não era apenas iminente e, em pouco tempo, se tornaria realidade.",
+            "A tribo aliada enviou um presente a sua para agradecer a ajuda na negociação com o inimigo. Laços fortes entres os povos estão se firmando.",
+
+            new Events[] { Events.S6A1 },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+
+        events[(int)Events.S6A2] = new Event(
+            defaultImg,
+            "Esperada por alguns e temida por todos, a possibilidade de uma guerra já era iminente e, em pouco tempo, se tornaria realidade.",
 
             new Events[] { },
             0, 0, 0,
@@ -890,9 +1319,17 @@ public class EventsList : MonoBehaviour
             new Option[] { }
         );
 
-        // falta S3A2Log
+        events[(int)Events.S6A2Log] = new Event(
+            defaultImg,
+            "Uma grande tempestade ocorreu durante os preparativos para a guerra. A tribo interpretou os raios como um apoio dos deuses para a batalha.",
 
-        events[(int)Events.S3B] = new Event(
+            new Events[] { Events.S6A2 },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+
+        events[(int)Events.S6B] = new Event(
             defaultImg,
             "Em uma reunião com a tribo aliada, estavam sendo decididas as estratégias de ataque para vencer a guerra. Para maximizar a força, era um consenso focar em apenas uma das várias cogitadas. Qual tática usar?",
 
@@ -900,13 +1337,13 @@ public class EventsList : MonoBehaviour
             0, 0, 0,
             0, 0, 0,
             new Option[] {
-                new Option("Atacar imediatamente", Events.S3B1),
-                new Option("Usar o terreno ao seu favor", Events.S3B2),
-                new Option("Intimidar com uma invocação aos deuses", Events.S3B3)
+                new Option("Atacar imediatamente", Events.S6B1),
+                new Option("Usar o terreno ao seu favor", Events.S6B2),
+                new Option("Intimidar com uma invocação aos deuses", Events.S6B3)
             }
         );
 
-        events[(int)Events.S3B1] = new Event(
+        events[(int)Events.S6B1] = new Event(
             defaultImg,
             "Um ataque imediato já era esperado pelos seus inimigos. Sua habilidade militar apenas amenizou a perda de guerreiros e mantimentos. O fracasso na batalha foi um dos piores fardos que sua tribo terá de carregar.",
 
@@ -916,9 +1353,17 @@ public class EventsList : MonoBehaviour
             new Option[] { }
         );
 
-        // falta S3B1Log
+        events[(int)Events.S6B1Log] = new Event(
+            defaultImg,
+            "Outros ataques aconteceram em um curto período de tempo. Com os guerreiros desestabilizados após o fracasso da última investida, muitos recursos se foram.",
 
-        events[(int)Events.S3B2] = new Event(
+            new Events[] { Events.S6B1 },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+
+        events[(int)Events.S6B2] = new Event(
             defaultImg,
             "Os seus inimigos não esperavam a habilidade que teriam dentro de seu próprio território. Com movimentos rápidos e sucintos, não foram capazes apenas de vencer a guerra.",
 
@@ -928,9 +1373,17 @@ public class EventsList : MonoBehaviour
             new Option[] { }
         );
 
-        // falta S3B2Log
+        events[(int)Events.S6B2Log] = new Event(
+            defaultImg,
+            "A tribo aliada enviou um presente a sua para agradecer a ajuda na luta contra o inimigo. Laços fortes entres os povos estão se firmando.",
 
-        events[(int)Events.S3B3] = new Event(
+            new Events[] { Events.S6B2 },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+
+        events[(int)Events.S6B3] = new Event(
             defaultImg,
             "A fé de sua tribo era muito maior do qualquer inimigo poderia esperar. Uma grande cerimônia foi realizada dias antes do ataque, intimidando completamente os atacantes. Uma parte deles ainda se converteu e foi morar em um pequeno clã amigo.",
 
@@ -940,7 +1393,300 @@ public class EventsList : MonoBehaviour
             new Option[] { }
         );
 
-        // falta S3B3Log
-    }
+        events[(int)Events.S6B3Log] = new Event(
+            defaultImg,
+            "A tribo aliada enviou um presente a sua para agradecer a ajuda na luta contra o inimigo. Laços fortes entres os povos estão se firmando.",
 
+            new Events[] { Events.S6B3 },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+		
+		events[(int)Events.S3A] = new Event(
+            defaultImg,
+            "O chefe de um dos mais importantes clãs da tribo decide arrumar um casamento para a sua filha. Alguns conselheiros apontam um homem da própria tribo como um esposo ideal, enquanto outros sugerem um vindo da tribo vizinha. O que fazer?",
+
+            new Events[] { },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] {
+                new Option("Um membro da própria tribo", Events.S3A1),
+                new Option("Um membro da tribo vizinha", Events.S3A2)
+            }
+        );
+
+        events[(int)Events.S3A1] = new Event(
+            defaultImg,
+            "Com o pretendente escolhido e tudo acertado entre as famílias, os preparativos começariam em breve.",
+
+            new Events[] { },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+
+        events[(int)Events.S3A1Log] = new Event(
+            defaultImg,
+            "Um bonito ritual foi feito como noivado para o casal. Os sacerdotes da tribo pediam aos deuses um casamento sólido em meio a um verdadeiro banquete.",
+
+            new Events[] { Events.S3A1 },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+
+        events[(int)Events.S3A2] = new Event(
+            defaultImg,
+            "Com o pretendente escolhido e tudo acertado entre as famílias, os preparativos começariam em breve.",
+
+            new Events[] { },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+
+        events[(int)Events.S3A2Log] = new Event(
+            defaultImg,
+            "Um bonito ritual foi feito como noivado para o casal. Os sacerdotes da tribo pediam aos deuses um casamento sólido em meio a um verdadeiro banquete.",
+
+            new Events[] { Events.S3A2 },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+	
+		events[(int)Events.S3B] = new Event(
+            defaultImg,
+            "Para comemorar o casamento que iria acontecer em breve, uma cerimônia seria realizada, mas os pais dos noivos não entravam em consenso quanto a ela. A família da noiva queria algo mais reservado, apenas para os chefes dos clãs, enquanto a do noivo queria uma grande comemoração popular. O que fazer?",
+
+            new Events[] { Events.S3A1 },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] {
+                new Option("Festa reservada", Events.S3B1),
+                new Option("Comemoração popular", Events.S3B2)
+            }
+        );
+
+        events[(int)Events.S3B1] = new Event(
+            defaultImg,
+            "Por mais que a festa tenha sido um verdadeiro exemplo de fartura, um sentimento amargo compadeceu no povo, que ficou excluído e se sentiu inferior diante a um acontecimento tão importante.",
+
+            new Events[] { },
+            0, 0, 0,
+            0, 0, -1,
+            new Option[] { }
+        );
+
+        events[(int)Events.S3B1Log] = new Event(
+            defaultImg,
+            "Uma grande mobilização popular aconteceu semanas depois, para comemorar um casamento entre dois camponeses. Mesmo modesta, a festa não contou com a presença dos chefes.",
+
+            new Events[] { Events.S3B1 },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+
+        events[(int)Events.S3B2] = new Event(
+            defaultImg,
+            "A festa parecia uma verdadeira cerimônia aos deuses, dada a beleza e a fartura da comemoração. Um verdadeiro sentimento de alegria tomou a tribo por semanas.",
+
+            new Events[] { },
+            0, 0, 0,
+            0, 0, 1,
+            new Option[] { }
+        );
+
+        events[(int)Events.S3B2Log] = new Event(
+            defaultImg,
+            "Uma grande mobilização popular aconteceu anos depois, para comemorar o nascimento do filho mais velho do casal.",
+
+            new Events[] { Events.S3B2 },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+		
+		events[(int)Events.S3C] = new Event(
+            defaultImg,
+            "Como parte do acordo de casamento entre os clãs, as tribos deveriam enviar uma espécie de grande presente. Alguns sábios sugeriam uma grande leva de recursos, enquanto outros achavam que a presença do próprio clã na outra tribo seria o melhor presente possível. O que fazer?",
+
+            new Events[] { Events.S3A2 },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] {
+                new Option("Enviar recursos", Events.S3C1),
+                new Option("Mudar o clã para a outra tribo", Events.S3C2)
+            }
+        );
+
+        events[(int)Events.S3C1] = new Event(
+            defaultImg,
+            "O presente foi muito bem recebido e aceito na tribo vizinha, que se encarregou de fazer uma grande cerimônia, tanto em beleza, quanto em representação de poder.",
+
+            new Events[] { },
+            0, 0, 0,
+            0, -1, 0,
+            new Option[] { }
+        );
+
+        events[(int)Events.S3C1Log] = new Event(
+            defaultImg,
+            "O casamento foi uma festa que ficaria guardada na memória de todos os presentes para o resto de sua vida. Nunca tinha-se visto tanta beleza e fartura.",
+
+            new Events[] { Events.S3C1 },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+
+        events[(int)Events.S3C2] = new Event(
+            defaultImg,
+            "A instalação do clã na outra tribo, após a belíssima festa de casamento, ocorreu sem problemas e acabou por firmar, de forma mais consistente, a aliança entre as tribos.",
+
+            new Events[] { },
+            0, 0, 0,
+            -1, 0, 0,
+            new Option[] { }
+        );
+
+        events[(int)Events.S3C2Log] = new Event(
+            defaultImg,
+            "O casamento foi uma festa que ficaria guardada na memória de todos os presentes para o resto de sua vida. Nunca tinha-se visto tanta beleza e fartura.",
+
+            new Events[] { Events.S3C2 },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+		
+		// good endings
+		
+		events[(int)Events.GoodEndReli] = new Event(
+            defaultImg, // COLOCAR IMAGEM DE FINAL RELIGIOSO
+            "A fé nos deuses deixou de estar presente apenas naquela região. Espalhando-se por todo o continente, a sua doutrina atravessou oceanos e planícies. para conquistar todo o planeta. Sua tribo tornou-se o maior centro religioso do mundo, levando, juntamente com a sua crença de bons valores, alienação, intolerância e a morte de milhões de pessoas que não acreditavam no poder das entidades.",
+
+            new Events[] { },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+		
+		events[(int)Events.GoodEndMerc] = new Event(
+            defaultImg, // COLOCAR IMAGEM DE FINAL MERCANTIL
+            "O comércio tornou-se o motor da sua sociedade. Novas técnicas e tecnologias foram desenvolvidas, maximizando a produção de forma exorbitante. A busca por novos mercados levou a sua tribo a tornar-se uma verdadeira potência dos mares, independente do preço a se pagar por isso. Milhares de pessoas vivem, todos os dias, em meio a uma hierarquia econômica opressora e que transforma suas próprias vidas em lucro.",
+
+            new Events[] { },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+		
+		events[(int)Events.GoodEndMili] = new Event(
+            defaultImg, // COLOCAR IMAGEM DE FINAL MILITAR
+            "A sua sociedade foi forjada no ferro das espadas e dos escudos. O maior exército já visto foi o responsável pela expansão territorial do que viria a se tornar um verdadeiro império. Em meio ao sangue de guerreiros e inocentes, sua tribo tornou-se a maior potência militar do mundo e é capaz de controlá-lo apenas pela eficiência de suas tropas.",
+
+            new Events[] { },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+		
+		// bad endings
+		// trigger: falta de pessoas
+		
+		events[(int)Events.BadEndPess] = new Event(
+            defaultImg, 
+            "Depois de muitas derrotas em guerras e fugas descontroladas, a população de sua tribo reduziu-se a apenas algumas dúzias de pessoas.",
+
+            new Events[] { },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+		
+		events[(int)Events.BadEndPess2] = new Event(
+            defaultImg, 
+            "Pode-se contar com as mãos os que ainda plantam para tentar sobreviver — a caça deixou de ser uma opção. A fome acompanha a tribo a cada noite.",
+
+            new Events[] { Events.BadEndPess },
+            0, 0, 0,
+            0, -6, 0,
+            new Option[] { }
+        );
+		
+		events[(int)Events.BadEndPess3] = new Event(
+            defaultImg, // COLOCAR IMAGEM DE BAD ENDING
+            "Os poucos que sobraram quase não tem mais comida, depois de ferrenhas lutas entre si. Sem pessoas, recursos ou sentimentos de esperança, sua tribo sofreu um ataque de um povo guerreiro do Leste. Todos foram dominados e escravizados.",
+
+            new Events[] { Events.BadEndPess },
+            0, 0, 0,
+            0, 0, -6,
+            new Option[] { }
+        );
+		
+		// trigger: falta de recursos		
+		events[(int)Events.BadEndRecu] = new Event(
+            defaultImg, 
+            "Os tempos de fartura são apenas história. Uma má administração dos alimentos, seguida de muitos saques feitos por outros povos, levou à uma desoladora fome, que assombrava a tribo desde então.",
+
+            new Events[] { },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+		
+		events[(int)Events.BadEndRecu2] = new Event(
+            defaultImg, 
+            "Aos poucos, a população da tribo diminuiu consideravelmente. Os poucos que ainda comiam lutavam por sua sobrevivência, mas todo o esforço parecia em vão.",
+
+            new Events[] { Events.BadEndRecu },
+            0, 0, 0,
+            -6, 0, 0,
+            new Option[] { }
+        );
+		
+		events[(int)Events.BadEndRecu3] = new Event(
+            defaultImg, // COLOCAR IMAGEM DE BAD ENDING
+            "Reduzidos em um precário abrigo, a tribo perdia, todas as semanas, mais um membro em lutas internas. Sem pessoas, recursos ou sentimentos de esperança, sua tribo sofreu um ataque de um povo guerreiro do Sul. Todos foram dominados e escravizados.",
+
+            new Events[] { Events.BadEndRecu },
+            0, 0, 0,
+            0, 0, -6,
+            new Option[] { }
+        );
+		
+		// trigger: falta de moral
+		events[(int)Events.BadEndMora] = new Event(
+            defaultImg, 
+            "Os clãs que compunham a tribo entraram em um estado extremo de tensão. Assasinatos ocorriam todos os dias, o desentendimento tornava-se sangue derramado. A tribo quebrou-se completamente.",
+
+            new Events[] { },
+            0, 0, 0,
+            0, 0, 0,
+            new Option[] { }
+        );
+		
+		events[(int)Events.BadEndMora2] = new Event(
+            defaultImg, 
+            "Separados e enfurecidos, a produção de alimentos decaía a cada semana que se passava. Os que não haviam morrido nas lutas, começavam a padecer de fome.",
+
+            new Events[] { Events.BadEndMora },
+            0, 0, 0,
+            0, -6, 0,
+            new Option[] { }
+        );
+		
+		events[(int)Events.BadEndMora3] = new Event(
+            defaultImg, // COLOCAR IMAGEM DE BAD ENDING
+            "Com a redução quase total da população, a tribo tentou se reunir, mas a situação apenas piorou. Sem pessoas, recursos ou sentimentos de esperança, sua tribo sofreu um ataque de um povo guerreiro do Sul. Todos foram dominados e escravizados.",
+
+            new Events[] { Events.BadEndMora },
+            0, 0, 0,
+            -6, 0, 0,
+            new Option[] { }
+        );
+    }	
 }

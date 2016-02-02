@@ -74,7 +74,7 @@ public class Society : MonoBehaviour
     public void AddMilitary()
     {
         military += 1;
-        path[keyDecisionCount] = StyleChoices.Religious;
+        path[keyDecisionCount] = StyleChoices.Military;
         roomObjects[keyDecisionCount].SetActive(true);
         roomObjects[keyDecisionCount].GetComponent<Image>().sprite = allRoomObjects[keyDecisionCount * 3 + (int)StyleChoices.Military];
         keyDecisionCount++;

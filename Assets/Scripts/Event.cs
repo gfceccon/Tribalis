@@ -25,6 +25,8 @@ public class Event
         this.defaultImg = imgPath.Equals(EventsList.defaultImg);
 		if (imgPath != null)
             this.image = Resources.Load<Sprite> ("Sprites/" + imgPath);
+        if (this.image == null)
+            this.image = Resources.Load<Sprite>("Sprites/" + EventsList.defaultImg);
 		this.text = text;
         this.requirements = requirements;
         this.religious = reli;
