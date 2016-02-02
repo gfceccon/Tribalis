@@ -9,7 +9,8 @@ public class Society : MonoBehaviour
     {
         Religious,
         Mercantile,
-        Military
+        Military,
+        None
     };
     //	[SerializeField]
     //	private int peopleVariation;
