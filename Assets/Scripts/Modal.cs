@@ -9,6 +9,7 @@ public class Modal : MonoBehaviour
     public float fontDownscale = 0.4f;
 
     private Game master;
+    private Canvas canvas;
     private Event currentEvent = null;
     private EventsList list = null;
 
@@ -16,13 +17,14 @@ public class Modal : MonoBehaviour
     void Start()
     {
         master = GetComponentInParent<Game>();
+        canvas = GetComponentInParent<Canvas>();
         list = master.list;
     }
 
     void Update()
     {
         if(description != null)
-            description.fontSize = Mathf.RoundToInt(Camera.main.pixelWidth * fontDownscale);
+            description.fontSize = Mathf.RoundToInt(canvas.pixelRect.width * fontDownscale);
     }
 
     public void Event(EventsList.Events option)
@@ -53,6 +55,7 @@ public class Modal : MonoBehaviour
             buttonTransform.sizeDelta.Set(1f, 1f);
             button.GetComponentInChildren<Text>().text = "Continuar";
             button.GetComponent<ModalButton>().option = EventsList.Events.None;
+            button.GetComponent<ModalButton>().source = GetComponentInParent<AudioSource>();
         }
         else foreach (Option op in currentEvent.options)
         {
@@ -74,6 +77,7 @@ public class Modal : MonoBehaviour
                 buttonTransform.sizeDelta.Set(1f, 1f);
                 button.GetComponentInChildren<Text>().text = op.optionText;
                 button.GetComponent<ModalButton>().option = op.consequence;
+                button.GetComponent<ModalButton>().source = GetComponentInParent<AudioSource>();
             }
         }
     }

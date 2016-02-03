@@ -63,14 +63,14 @@ public class GameMusic : MonoBehaviour
             mixerPattern = newMixerPattern;
         }
 
-        mercantile.volume = 1f;
-        mercantileBeat.volume = 1f;
+        mercantile.volume = mixerPattern[0].x;
+        mercantileBeat.volume = mixerPattern[0].x;
 
-        military.volume = 1f;
-        militaryBeat.volume = 1f;
+        military.volume = mixerPattern[0].y;
+        militaryBeat.volume = mixerPattern[0].y;
 
-        religious.volume = 1f;
-        religiousBeat.volume = 1f;
+        religious.volume = mixerPattern[0].z;
+        religiousBeat.volume = mixerPattern[0].z;
         
         StartCoroutine(Crossfade());
     }
@@ -85,7 +85,7 @@ public class GameMusic : MonoBehaviour
         StartCoroutine(CrossfadeStyle());
     }
 
-    float CosineInterpolate(float y1, float y2, float mu)
+    public static float CosineInterpolate(float y1, float y2, float mu)
     {
         float mu2;
 
@@ -175,15 +175,15 @@ public class GameMusic : MonoBehaviour
                         volumes.x = 0f;
                 }
 
-                crossfadeVolume = CosineInterpolate(mercantileVolume, volumes.x, time / fadeDuration);
+                crossfadeVolume = GameMusic.CosineInterpolate(mercantileVolume, volumes.x, time / fadeDuration);
                 mercantile.volume = crossfadeVolume;
                 mercantileBeat.volume = crossfadeVolume;
 
-                crossfadeVolume = CosineInterpolate(militaryVolume, volumes.y, time / fadeDuration);
+                crossfadeVolume = GameMusic.CosineInterpolate(militaryVolume, volumes.y, time / fadeDuration);
                 military.volume = crossfadeVolume;
                 militaryBeat.volume = crossfadeVolume;
 
-                crossfadeVolume = CosineInterpolate(religiousVolume, volumes.z, time / fadeDuration);
+                crossfadeVolume = GameMusic.CosineInterpolate(religiousVolume, volumes.z, time / fadeDuration);
                 religious.volume = crossfadeVolume;
                 religiousBeat.volume = crossfadeVolume;
 

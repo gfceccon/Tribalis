@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 [RequireComponent(typeof(EventsList))]
@@ -12,6 +13,7 @@ public class Game : MonoBehaviour
     public GameMusic music;
     public float delayTime = 2f;
     public float visibleTime = 0.2f;
+    public string menuSceneName = "Menu";
     [Header("Music Presets")]
     public MusicPreset mercantile;
     public MusicPreset military;
@@ -207,13 +209,13 @@ public class Game : MonoBehaviour
 
     private void Win()
     {
-        Application.Quit();
         music.Stop();
+        SceneManager.LoadScene(menuSceneName);
     }
 
     private void Lose()
     {
-        Application.Quit();
         music.Stop();
+        SceneManager.LoadScene(menuSceneName);
     }
 }
